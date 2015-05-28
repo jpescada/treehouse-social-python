@@ -14,6 +14,10 @@ HOST = '127.0.0.1'
 app = Flask(__name__)
 app.secret_key = 'auoesh.bouoastuh.43,uoausoehuosth3ououea.auoub!'
 
+app.config.update(dict(
+  PREFERRED_URL_SCHEME = 'https'
+))
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
