@@ -4,7 +4,16 @@ from flask.ext.bcrypt import generate_password_hash
 from flask.ext.login import UserMixin
 from peewee import *
 
-DATABASE = SqliteDatabase('social.db')
+# DATABASE = SqliteDatabase('social.db')
+
+# TODO: to allow running locally and in heroky try https://gist.github.com/fprieur/9561148
+DATABASE = PostgresqlDatabase(
+    database='d658298udpv5nl',
+    user='nfglrfeqwjkhbb',
+    password='mktmjjSWEt81fvD9mgUJZwxxWQ',
+    host='ec2-54-197-224-173.compute-1.amazonaws.com',
+    port='5432'
+  )
 
 class User(UserMixin, Model):
     username = CharField(unique=True)
