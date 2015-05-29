@@ -14,9 +14,9 @@ HOST = '127.0.0.1'
 app = Flask(__name__)
 app.secret_key = 'auoesh.bouoastuh.43,uoausoehuosth3ououea.auoub!'
 
-app.config.update(dict(
+app.config.update(
   PREFERRED_URL_SCHEME = 'https'
-))
+)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -55,7 +55,7 @@ def register():
             email=form.email.data,
             password=form.password.data
         )
-        return redirect(url_for('index', _external=True))
+        return redirect(url_for('index'))
     return render_template('register.html', form=form)
 
 
@@ -71,7 +71,7 @@ def login():
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
                 flash("You've been logged in!", "success")
-                return redirect(url_for('index', _external=True))
+                return redirect(url_for('index'))
             else:
                 flash("Your email or password doesn't match!", "error")
     return render_template('login.html', form=form)
@@ -82,7 +82,7 @@ def login():
 def logout():
     logout_user()
     flash("You've been logged out! Come back soon!", "success")
-    return redirect(url_for('index', _external=True))
+    return redirect(url_for('index'))
 
 
 @app.route('/new_post', methods=('GET', 'POST'))
@@ -93,7 +93,7 @@ def post():
         models.Post.create(user=g.user.id,
                            content=form.content.data.strip())
         flash("Message posted! Thanks!", "success")
-        return redirect(url_for('index', _external=True))
+        return redirect(url_for('index'))
     return render_template('post.html', form=form)
 
 
