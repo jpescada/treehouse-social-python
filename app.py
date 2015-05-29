@@ -55,7 +55,7 @@ def register():
             email=form.email.data,
             password=form.password.data
         )
-        return redirect(url_for('index', _scheme='https'))
+        return redirect(url_for('index', _external=True))
     return render_template('register.html', form=form)
 
 
@@ -71,7 +71,7 @@ def login():
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
                 flash("You've been logged in!", "success")
-                return redirect(url_for('index', _scheme='https'))
+                return redirect(url_for('index', _external=True))
             else:
                 flash("Your email or password doesn't match!", "error")
     return render_template('login.html', form=form)
@@ -82,7 +82,7 @@ def login():
 def logout():
     logout_user()
     flash("You've been logged out! Come back soon!", "success")
-    return redirect(url_for('index', _scheme='https'))
+    return redirect(url_for('index', _external=True))
 
 
 @app.route('/new_post', methods=('GET', 'POST'))
@@ -93,7 +93,7 @@ def post():
         models.Post.create(user=g.user.id,
                            content=form.content.data.strip())
         flash("Message posted! Thanks!", "success")
-        return redirect(url_for('index', _scheme='https'))
+        return redirect(url_for('index', _external=True))
     return render_template('post.html', form=form)
 
 
